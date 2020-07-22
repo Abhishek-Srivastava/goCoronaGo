@@ -1,0 +1,12 @@
+{
+  "name": "goCoronaGo",
+  "displayName": "goCoronaGo",
+  "expo": {
+    "name": "goCoronaGo",
+    "slug": "goCoronaGo",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
