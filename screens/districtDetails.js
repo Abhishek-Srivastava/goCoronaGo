@@ -5,9 +5,28 @@ import { StateDataContext } from '../shared/apiDistrictwise';
 import { ModalCard, HeadingModalCard } from '../shared/cards';
 
 export default function DistrictDetails({ name }) {
-    const allStates = useContext(StateDataContext);
+    const { data, isLoading, errorOccurred } = useContext(StateDataContext);
 
-    const currentState = allStates[name]
+    if (isLoading) {
+        return (
+            <View style={globalStyles.screenLoadingContainer}>
+                <ActivityIndicator size="large" color="#00ff00" />
+                <Text style={{ ...headerStyle.headerText, marginTop: 20 }}>Loading district wise stats...</Text>
+            </View>
+        );
+    }
+
+    if (errorOccurred) {
+        return (
+            <View style={globalStyles.container}>
+                <Card>
+                    <Text style={globalStyles.CardText}>Failed to fetch data from the server :(</Text>
+                </Card>
+            </View>
+        )
+    }
+
+    const currentState = data[name]
 
     let myComp = [];
 

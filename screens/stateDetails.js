@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Text, View, SafeAreaView, ScrollView, Button, Modal, TouchableOpacity } from 'react-native';
+import { Text, View, SafeAreaView, ScrollView, Modal, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { globalStyles, globalStylesScrollers, globalModal, headerStyle, iconColor } from '../styles/globalStyles';
 import Card, { SubHeaderCard } from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
@@ -9,11 +9,33 @@ import DistrictDetails from './districtDetails';
 export default function StateDetails({ navigation }) {
     const stateName = navigation.state.routeName
     console.log("Rendering info for " + stateName)
-    const { statewise } = useContext(CumulativeDataContext);
 
+    const { data, isLoading, errorOccurred } = useContext(CumulativeDataContext);
+
+    
+    if (isLoading) {
+        return (
+            <View style={globalStyles.screenLoadingContainer}>
+                <ActivityIndicator size="large" color="#00ff00" />
+                <Text style={{ ...headerStyle.headerText, marginTop: 20 }}>Loading district wise stats...</Text>
+            </View>
+        );
+    }
+
+    if (errorOccurred) {
+        return (
+            <View style={globalStyles.container}>
+                <Card>
+                    <Text style={globalStyles.CardText}>Failed to fetch data from the server :(</Text>
+                </Card>
+            </View>
+        )
+    }
+
+    const { statewise } = data;
     const [modalOpen, setModalOpen] = useState('false')
 
-    if (statewise.length) {
+    if (statewise) {
         stateToBeRendered = statewise.filter((state) => state.state == stateName)
         console.log("filtered state: " + stateToBeRendered[0].state)
         const { confirmed, recovered, deaths, deltaconfirmed,
@@ -102,7 +124,7 @@ export default function StateDetails({ navigation }) {
             <>
                 <View style={globalStyles.container}>
                     <Card>
-                        <Text style={globalStyles.CardText}>NOT LOADED!!!!</Text>
+                        <Text style={globalStyles.CardText}>NOT LOADED States!!!!</Text>
                     </Card>
                 </View>
             </>

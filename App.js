@@ -21,8 +21,8 @@ export default function App() {
       <CumulativeDataContextProvider>
         <StateDataContextProvider>
         <Navigator />
-        </StateDataContextProvider>
-      </CumulativeDataContextProvider>
+         </StateDataContextProvider>
+       </CumulativeDataContextProvider>
     );
   } else {
     return(
