@@ -6,7 +6,6 @@ const CumulativeDataContextProvider = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [errorOccurred, setErrorOccurred] = useState(false)
-  console.log("Is home loading " + isLoading)
 
   const fetchCumulativeData = async (signal) => {
     fetch(CUMULATIVE_API_EP, { signal: signal })

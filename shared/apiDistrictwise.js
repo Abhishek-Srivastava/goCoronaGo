@@ -7,7 +7,6 @@ const StateDataContextProvider = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [errorOccurred, setErrorOccurred] = useState(false)
-  console.log("Is State loading " + isLoading)
   
   const fetchCumulativeData = async (signal) => {
     fetch(STATE_API_EP, { signal: signal })

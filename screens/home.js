@@ -7,7 +7,6 @@ import { CumulativeDataContext } from '../shared/apiClient';
 
 export default function Home({ navigation }) {
     const { data, isLoading, errorOccurred, setLoading, setErrorOccurred } = useContext(CumulativeDataContext);
-    console.log("Is loading homepage: " + isLoading)
     if (isLoading) {
         return (
             <View style={globalStyles.screenLoadingContainer}>
@@ -21,7 +20,6 @@ export default function Home({ navigation }) {
         setLoading(true);
         setErrorOccurred(false)
     }
-    console.log("error is " + errorOccurred)
     if (errorOccurred) {
 
         return (
