@@ -24,7 +24,9 @@ const CumulativeDataContextProvider = (props) => {
     }
   }, [isLoading]);
   return (
-    <CumulativeDataContext.Provider value={{data: data, isLoading:isLoading, errorOccurred:errorOccurred}}>
+    <CumulativeDataContext.Provider value={{data: data, 
+    isLoading:isLoading, errorOccurred:errorOccurred, setLoading:setLoading,
+    setErrorOccurred: setErrorOccurred}}>
     {/* <CumulativeDataContext.Provider value={data, }> */}
       {props.children}
     </CumulativeDataContext.Provider>

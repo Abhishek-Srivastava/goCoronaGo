@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, FlatList, } from 'react-native';
 import { globalStyles, globalStylesScrollers, globalModal } from '../styles/globalStyles';
 import { StateDataContext } from '../shared/apiDistrictwise';
 import { ModalCard, HeadingModalCard } from '../shared/cards';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function DistrictDetails({ name }) {
     const { data, isLoading, errorOccurred } = useContext(StateDataContext);
@@ -38,11 +39,17 @@ export default function DistrictDetails({ name }) {
         )
     });
 
-    const Item = ({ dName, active, confirmed, deceased, recovered }) => (
+    const Item = ({ dName, active, confirmed, deceased, recovered, delta }) => (
         <View key={dName}>
             <View style={globalStyles.container}>
                 <HeadingModalCard>
-                    <Text style={globalModal.HeadingCardText}>{dName}</Text>
+                    <Text key={name+dName} style={globalModal.HeadingCardText}>{dName}</Text>
+                    <Text key={name+dName+"confirmed"} style={globalModal.HeadingCardText}>{delta.confirmed}</Text>
+                    <MaterialCommunityIcons name="emoticon-happy-outline" size={24} color="blue" />
+                    <Text key={name+dName+"recovered"} style={globalModal.HeadingCardText}>{delta.recovered}</Text>
+                    <MaterialCommunityIcons name="emoticon-sad-outline" size={24} color="yellow" />
+                    <Text key={name+dName+"deceased"} style={globalModal.HeadingCardText}>{delta.deceased}</Text>
+                    <MaterialCommunityIcons name="emoticon-dead-outline" size={24} color="#e4286b" />
                 </HeadingModalCard>
             </View>
             <View style={globalStyles.container}>
@@ -72,7 +79,8 @@ export default function DistrictDetails({ name }) {
                 active={item.active}
                 confirmed={item.confirmed}
                 deceased={item.deceased}
-                recovered={item.recovered} />
+                recovered={item.recovered}
+                delta={item.delta} />
         )
     };
 

@@ -26,7 +26,7 @@ export function ModalCard(props) {
 export function HeadingModalCard(props) {
     return (
         <View style={globalModal.HeadingCard}>
-            <View style={globalModal.CardContent}>
+            <View style={globalModal.HeadingCardContent}>
                 {props.children}
             </View>
         </View>
@@ -37,6 +37,16 @@ export function SubHeaderCard(props) {
     return (
         <View style={globalModal.SubHeadingCard}>
             <View style={globalModal.SubHeadingCardContent}>
+                {props.children}
+            </View>
+        </View>
+    )
+}
+
+export function ErrorCard(props) {
+    return (
+        <View style={globalStyles.ErrorCard}>
+            <View style={globalStyles.CardContent}>
                 {props.children}
             </View>
         </View>

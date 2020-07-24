@@ -1,23 +1,25 @@
 import React, { useContext, useState } from 'react'
 import { Text, View, SafeAreaView, ScrollView, Modal, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { globalStyles, globalStylesScrollers, globalModal, headerStyle, iconColor } from '../styles/globalStyles';
-import Card, { SubHeaderCard } from '../shared/cards';
+import Card, { SubHeaderCard, ErrorCard } from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
 import { MaterialIcons } from '@expo/vector-icons';
 import DistrictDetails from './districtDetails';
 
 export default function StateDetails({ navigation }) {
     const stateName = navigation.state.routeName
-    console.log("Rendering info for " + stateName)
 
-    const { data, isLoading, errorOccurred } = useContext(CumulativeDataContext);
-
+    const { data, isLoading, errorOccurred, setLoading, setErrorOccurred } = useContext(CumulativeDataContext);
+    const refresh = () => {
+        setLoading(true);
+        setErrorOccurred(false)
+    }
     
     if (isLoading) {
         return (
             <View style={globalStyles.screenLoadingContainer}>
                 <ActivityIndicator size="large" color="#00ff00" />
-                <Text style={{ ...headerStyle.headerText, marginTop: 20 }}>Loading district wise stats...</Text>
+                <Text style={{ ...headerStyle.headerText, marginTop: 20 }}>Loading district wise stats ...</Text>
             </View>
         );
     }
@@ -25,9 +27,11 @@ export default function StateDetails({ navigation }) {
     if (errorOccurred) {
         return (
             <View style={globalStyles.container}>
-                <Card>
+                <TouchableOpacity onPress={refresh}>
+                <ErrorCard>
                     <Text style={globalStyles.CardText}>Failed to fetch data from the server :(</Text>
-                </Card>
+                </ErrorCard>
+            </TouchableOpacity>
             </View>
         )
     }
@@ -37,7 +41,6 @@ export default function StateDetails({ navigation }) {
 
     if (statewise) {
         stateToBeRendered = statewise.filter((state) => state.state == stateName)
-        console.log("filtered state: " + stateToBeRendered[0].state)
         const { confirmed, recovered, deaths, deltaconfirmed,
             deltadeaths, deltarecovered, lastupdatedtime, active, statenotes } = stateToBeRendered[0]
         return (

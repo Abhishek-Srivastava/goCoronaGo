@@ -68,6 +68,21 @@ export const globalStyles = StyleSheet.create({
     marginHorizontal: 4,
     marginVertical: 6,
   },
+  ErrorCard: {
+
+    borderRadius: 6,
+    backgroundColor: '#e2286a',
+    shadowColor: '#333',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+    elevation: 24,
+    marginHorizontal: 4,
+    marginVertical: 6,
+  },
   CardContent: {
     marginHorizontal: 5,
     marginVertical: 15,
@@ -142,6 +157,13 @@ export const globalModal = StyleSheet.create({
     elevation: 24,
     marginHorizontal: 4,
     marginVertical: 6,
+  },
+  HeadingCardContent: {
+    marginHorizontal: 2,
+    marginVertical: 2,
+    alignSelf: 'stretch',
+    justifyContent: 'space-evenly',
+    flexDirection:'row',
   },
   SubHeadingCard: {
     flex: 1,

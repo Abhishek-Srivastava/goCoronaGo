@@ -1,28 +1,36 @@
 import React, { useContext } from 'react'
-import { Text, View, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { Text, View, SafeAreaView, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { globalStyles, globalStylesScrollers, headerStyle } from '../styles/globalStyles';
-import Card from '../shared/cards';
+import Card, {ErrorCard} from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
 
 
 export default function Home({ navigation }) {
-    const { data, isLoading, errorOccurred } = useContext(CumulativeDataContext);
-    
+    const { data, isLoading, errorOccurred, setLoading, setErrorOccurred } = useContext(CumulativeDataContext);
+    console.log("Is loading homepage: " + isLoading)
     if (isLoading) {
         return (
             <View style={globalStyles.screenLoadingContainer}>
                 <ActivityIndicator size="large" color="#00ff00" />
-                <Text style={{ ...headerStyle.headerText, marginTop: 20 }}>Loading cumulative covid stats...</Text>
+                <Text style={{ ...headerStyle.headerText, marginTop: 20 }}>Loading cumulative covid stats ...</Text>
             </View>
         );
     }
 
+    const refresh = () => {
+        setLoading(true);
+        setErrorOccurred(false)
+    }
+    console.log("error is " + errorOccurred)
     if (errorOccurred) {
+
         return (
             <View style={globalStyles.container}>
-                <Card>
+                <TouchableOpacity onPress={refresh}>
+                <ErrorCard>
                     <Text style={globalStyles.CardText}>Failed to fetch data from the server :(</Text>
-                </Card>
+                </ErrorCard>
+            </TouchableOpacity>
             </View>
         )
     }
