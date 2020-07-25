@@ -8,8 +8,6 @@ import StateDataContextProvider from './shared/apiDistrictwise';
 const getFonts = () => Font.loadAsync({
   'Nunito-Regular': require('./assets/fonts/Nunito/Nunito-Regular.ttf'),
   'Nunito-Bold': require('./assets/fonts/Nunito/Nunito-Bold.ttf'),
-  'Nunito-Italic': require('./assets/fonts/Nunito/Nunito-Italic.ttf'),
-  'Nunito-BoldItalic': require('./assets/fonts/Nunito/Nunito-BoldItalic.ttf'),
   'Nunito-SemiBold': require('./assets/fonts/Nunito/Nunito-SemiBold.ttf'),
 })
 

@@ -7,8 +7,12 @@ const CumulativeDataContextProvider = (props) => {
   const [data, setData] = useState({});
   const [errorOccurred, setErrorOccurred] = useState(false)
 
+  let headers = new Headers({
+    'Accept-Encoding': 'gzip, deflate',
+    'Content-Type': 'application/json',
+  });
   const fetchCumulativeData = async (signal) => {
-    fetch(CUMULATIVE_API_EP, { signal: signal })
+    fetch(CUMULATIVE_API_EP, { signal: signal, headers: headers })
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => setErrorOccurred(true))

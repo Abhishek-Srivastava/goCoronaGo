@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import StateDetails from '../screens/stateDetails';
 import Header from '../shared/header';
-import { myStates } from '../shared/statesObj';
+import {myStates} from '../shared/statesObj';
 import { APP_NAME } from '../shared/appConstants';
 import { headerBgColor } from '../styles/globalStyles';
 

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Text, View, SafeAreaView, ScrollView, Modal, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { globalStyles, globalStylesScrollers, globalModal, headerStyle, iconColor } from '../styles/globalStyles';
-import Card, { SubHeaderCard, ErrorCard } from '../shared/cards';
+import { globalStyles, globalStylesScrollers, globalModal, headerStyle, iconColor, normalize } from '../styles/globalStyles';
+import Card, { ModalSubHeaderCard, ErrorCard } from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
 import { MaterialIcons } from '@expo/vector-icons';
 import DistrictDetails from './districtDetails';
@@ -14,12 +14,12 @@ export default function StateDetails({ navigation }) {
         setLoading(true);
         setErrorOccurred(false)
     }
-    
+
     if (isLoading) {
         return (
             <View style={globalStyles.screenLoadingContainer}>
                 <ActivityIndicator size="large" color="#00ff00" />
-                <Text style={{ ...headerStyle.headerText, marginTop: 20 }}>Loading district wise stats ...</Text>
+                <Text style={{ ...headerStyle.headerText, marginTop: normalize(20) }}>Loading district wise stats ...</Text>
             </View>
         );
     }
@@ -28,10 +28,10 @@ export default function StateDetails({ navigation }) {
         return (
             <View style={globalStyles.container}>
                 <TouchableOpacity onPress={refresh}>
-                <ErrorCard>
-                    <Text style={globalStyles.CardText}>Failed to fetch data from the server :(</Text>
-                </ErrorCard>
-            </TouchableOpacity>
+                    <ErrorCard>
+                        <Text style={globalStyles.CardText}>Failed to fetch data from the server :(</Text>
+                    </ErrorCard>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -47,16 +47,16 @@ export default function StateDetails({ navigation }) {
             <SafeAreaView style={globalStylesScrollers.safeArea}>
                 <ScrollView style={globalStylesScrollers.scrollView}>
                     <TouchableOpacity onPress={() => setModalOpen(true)}>
-                    <SubHeaderCard>
-                        <MaterialIcons name='details' size={16} 
-                            style={{ backgroundColor: iconColor }}
-                            onPress={() => setModalOpen(true)}
-                        />
-                            <Text style={{...globalModal.HeadingCardText}}>{stateToBeRendered[0].state}</Text>
-                    </SubHeaderCard>
+                        <ModalSubHeaderCard>
+                            <MaterialIcons name='details' size={normalize(16)}
+                                style={{ backgroundColor: iconColor }}
+                                onPress={() => setModalOpen(true)}
+                            />
+                            <Text style={{ ...globalModal.HeadingCardText }}>{stateToBeRendered[0].state}</Text>
+                        </ModalSubHeaderCard>
                     </TouchableOpacity>
                     <View style={globalStyles.container}>
-                        <Modal visible={modalOpen} animationType='slide'>
+                        <Modal visible={modalOpen} animationType='slide' onRequestClose={() => setModalOpen(false)}>
                             <View style={globalModal.modalContent}>
                                 <MaterialIcons
                                     name='close'
@@ -87,20 +87,20 @@ export default function StateDetails({ navigation }) {
                             <Text style={globalStyles.CardText}>{active}</Text>
                         </Card>
                         <Card >
-                            <Text style={globalStyles.CardText}>Total Recovered:</Text>
-                            <Text style={globalStyles.CardText}>{recovered}</Text>
+                            <Text style={globalStyles.CardText}>Recovered Today:</Text>
+                            <Text style={globalStyles.CardText}>{deltarecovered}</Text>
                         </Card>
 
                     </View>
                     <View style={globalStyles.container}>
 
+                        <Card >
+                            <Text style={globalStyles.CardText}>Total Recovered:</Text>
+                            <Text style={globalStyles.CardText}>{recovered}</Text>
+                        </Card>
                         <Card>
                             <Text style={globalStyles.CardText}>Deaths Today:</Text>
                             <Text style={globalStyles.CardText}>{deltadeaths}</Text>
-                        </Card>
-                        <Card >
-                            <Text style={globalStyles.CardText}>Recovered Today:</Text>
-                            <Text style={globalStyles.CardText}>{deltarecovered}</Text>
                         </Card>
                     </View>
                     <View style={globalStyles.container}>
@@ -110,13 +110,16 @@ export default function StateDetails({ navigation }) {
                         </Card>
                         <Card>
                             <Text style={globalStyles.CardText}>Last Updated</Text>
-                            <Text style={globalStyles.CardText}>{lastupdatedtime}</Text>
+                            <Text style={{
+                                ...globalStyles.CardText, fontSize: normalize(14),
+                                paddingVertical: normalize(5)
+                            }}>{lastupdatedtime}</Text>
                         </Card>
                     </View>
                     <View style={globalStyles.container}>
                         <Card>
                             <Text style={globalStyles.CardText}>State Notes</Text>
-                            <Text style={globalStyles.CardText}>{statenotes}</Text>
+                            <Text style={globalStyles.CardText}>{statenotes == '' ? 'Not updated' : statenotes}</Text>
                         </Card>
                     </View>
                 </ScrollView>

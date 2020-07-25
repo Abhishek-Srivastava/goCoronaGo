@@ -5,8 +5,13 @@
     "name": "goCoronaGo",
     "slug": "goCoronaGo",
     "version": "1.0.0",
+    "icon": "./assets/images/coronavirus-nobg.png",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.abhishek_srivastava.goCoronaGo",
+      "versionCode": 2
+    }
   }
 }
