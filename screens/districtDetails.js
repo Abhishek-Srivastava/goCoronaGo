@@ -13,11 +13,11 @@ const MyDelta = ({ delta, name, dName, display }) => {
         <HeadingModalCard>
             <Text style={globalModal.HeadingCardText} >Today's Updates: </Text>
             <Text key={name + dName + "confirmed"} style={globalModal.HeadingCardText}>{delta.confirmed}</Text>
-            <MaterialCommunityIcons name="emoticon-sad-outline" size={normalize(24)} color="yellow" />
+            <MaterialCommunityIcons name="emoticon-sad-outline" size={normalize(22)} color="yellow" />
             <Text key={name + dName + "recovered"} style={globalModal.HeadingCardText}>{delta.recovered}</Text>
-            <MaterialCommunityIcons name="emoticon-happy-outline" size={normalize(24)} color="blue" />
+            <MaterialCommunityIcons name="emoticon-happy-outline" size={normalize(22)} color="blue" />
             <Text key={name + dName + "deceased"} style={globalModal.HeadingCardText}>{delta.deceased}</Text>
-            <MaterialCommunityIcons name="emoticon-dead-outline" size={normalize(24)} color="#e4286b" />
+            <MaterialCommunityIcons name="emoticon-dead-outline" size={normalize(22)} color="#e4286b" />
         </HeadingModalCard>
     );
 }
@@ -28,7 +28,7 @@ export default function DistrictDetails({ name }) {
         return (
             <View style={globalStyles.screenLoadingContainer}>
                 <ActivityIndicator size="large" color="#00ff00" />
-                <Text style={{ ...headerStyle.headerText, marginTop: normalize(20) }}>Loading district wise stats...</Text>
+                <Text style={{ ...headerStyle.headerText, marginTop: normalize(16) }}>Loading district wise stats...</Text>
             </View>
         );
     }
@@ -70,12 +70,11 @@ export default function DistrictDetails({ name }) {
 
     const Item = ({ dName, active, confirmed, deceased, recovered, delta }) => {
         const [display, setDisplay] = useState(true)
-        console.log('display inside func it ' + display)
         return (
             <View key={dName}>
                 <TouchableOpacity onPress={() => setDisplay(!display)}>
                     <ModalSubHeaderCard>
-                        <MaterialIcons name='details' size={normalize(16)}
+                        <MaterialIcons name='details' size={normalize(14)}
                             style={{ backgroundColor: iconColor }}
                             onPress={() => setModalOpen(true)}
                         />
@@ -87,7 +86,7 @@ export default function DistrictDetails({ name }) {
                 </View>
                 <View style={globalStyles.container}>
                     <ModalCard>
-                        <Text style={{ ...globalModal.CardText, fontSize: normalize(15) }}>Confirmed</Text>
+                        <Text style={{ ...globalModal.CardText, fontSize: normalize(12) }}>Confirmed</Text>
                         <Text style={globalModal.CardText}>{confirmed}</Text>
                     </ModalCard>
                     <ModalCard>
@@ -95,7 +94,7 @@ export default function DistrictDetails({ name }) {
                         <Text style={globalModal.CardText}>{active}</Text>
                     </ModalCard>
                     <ModalCard>
-                        <Text style={{ ...globalModal.CardText, fontSize: normalize(15) }}>Recovered</Text>
+                        <Text style={{ ...globalModal.CardText, fontSize: normalize(12) }}>Recovered</Text>
                         <Text style={globalModal.CardText}>{recovered}</Text>
                     </ModalCard>
                     <ModalCard>

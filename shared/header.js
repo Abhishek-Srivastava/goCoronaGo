@@ -26,27 +26,26 @@ export default function Header(props) {
 
     const HeaderComp = () => (
         <View style={headerStyle.header}>
-            <MaterialIcons name='menu' size={normalize(32)}
+            <MaterialIcons name='menu' size={normalize(18)}
                 onPress={openMenu} style={headerStyle.icon}
             />
             <View style={headerStyle.headerTitle}>
-                <Image style={{ ...headerStyle.headerImage, }} source={require('../assets/images/coronavirus-nobg.png')} />
+                <Image style={{ ...headerStyle.headerImage, }} source={require('../assets/images/coronavirus-withbg.png')} />
                 <Text style={headerStyle.headerText}>{title}</Text>
+            </View>
                 <TouchableOpacity onPress={refresh}>
                     <FontAwesome
                         name="refresh"
-                        size={normalize(24)}
+                        size={normalize(16)}
                         color="black"
-                        style={{ marginLeft: normalize(20), marginTop: normalize(10) }}
                     />
                 </TouchableOpacity>
-            </View>
         </View>
     )
     const ActivityComponent = () => (
         <View style={globalStyles.screenLoadingContainer}>
             <ActivityIndicator size="large" color="#00ff00" />
-            <Text style={{ ...headerStyle.headerText, marginTop: normalize(20) }}>Loading district wise stats ...</Text>
+            <Text style={{ ...headerStyle.headerText, marginTop: normalize(14) }}>Loading district wise stats ...</Text>
         </View>
     )
     return (

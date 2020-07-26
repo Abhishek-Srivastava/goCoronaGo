@@ -6,9 +6,7 @@ const {
   height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
-// based on iphone 5s's scale
 const scale = SCREEN_WIDTH / 320;
-
 export function normalize(size) {
   const newSize = size * scale
   if (Platform.OS === 'ios') {
@@ -18,8 +16,6 @@ export function normalize(size) {
   }
 }
 
-// const containerBgColor = '#383ebd'
-// const cardBgColor = '#0a0d47'
 export const containerBgColor = '#0a0d47'
 export const cardBgColor = '#383ebd'
 export const cardHeadingColor = '#38bd82'
@@ -28,35 +24,30 @@ export const headerBgColor = '#eb7ae7'
 
 export const headerStyle = StyleSheet.create({
   header: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
   headerText: {
     fontFamily: 'Nunito-SemiBold',
     fontWeight: '700',
     color: 'black',
-    fontSize: normalize(26),
-    //letterSpacing: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
+    fontSize: normalize(16),
+    letterSpacing: 1,
   },
   icon: {
-    position: 'absolute',
-    left: normalize(10),
+    //position: 'absolute',
+    //left: normalize(10),
   },
   headerImage: {
-    width: normalize(42),
-    height: normalize(42),
-    //marginLeft: normalize(10),
+    width: normalize(22),
+    height: normalize(22),
     backgroundColor: 'transparent',
 
   },
   headerTitle: {
-    alignItems: 'stretch',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 })
 
@@ -76,7 +67,6 @@ export const globalStyles = StyleSheet.create({
   },
   Card: {
     flex: 1,
-    //borderRadius: 6,
     backgroundColor: cardBgColor,
     shadowColor: '#333',
     shadowOffset: {
@@ -84,7 +74,6 @@ export const globalStyles = StyleSheet.create({
       height: 12,
     },
     shadowOpacity: 0.58,
-    //shadowRadius: 16.00,
     elevation: 24,
     marginHorizontal: normalize(4),
     marginVertical: normalize(6),
@@ -98,7 +87,7 @@ export const globalStyles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center',
     fontFamily: 'Nunito-SemiBold',
-    fontSize: normalize(16),
+    fontSize: normalize(12),
     justifyContent: 'center',
   },
   ErrorCard: {
@@ -107,7 +96,7 @@ export const globalStyles = StyleSheet.create({
     shadowColor: '#333',
     shadowOffset: {
       width: 0,
-      height: normalize(12),
+      height: normalize(8),
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.00,
@@ -117,7 +106,6 @@ export const globalStyles = StyleSheet.create({
   },
   SubHeadingCard: {
     flex: 1,
-    //borderRadius: 6,
     backgroundColor: cardHeadingColor,
     shadowColor: '#333',
     shadowOffset: {
@@ -125,7 +113,6 @@ export const globalStyles = StyleSheet.create({
       height: normalize(12),
     },
     shadowOpacity: 0.58,
-    //shadowRadius: 16.00,
     elevation: 24,
     marginHorizontal: normalize(4),
     marginVertical: normalize(6),
@@ -146,7 +133,7 @@ export const globalStyles = StyleSheet.create({
     color: 'black',
     alignSelf: 'center',
     fontFamily: 'Nunito-Bold',
-    fontSize: normalize(16),
+    fontSize: normalize(12),
     justifyContent: 'center',
   },
 });
@@ -171,7 +158,6 @@ export const globalModal = StyleSheet.create({
     padding: normalize(10),
     borderRadius: normalize(10),
     alignSelf: 'center',
-    //color: iconColor,
     backgroundColor: iconColor,
   },
   modalClose: {
@@ -184,7 +170,6 @@ export const globalModal = StyleSheet.create({
   },
   Card: {
     flex: 1,
-    //borderRadius: 6,
     backgroundColor: cardBgColor,
     shadowColor: '#333',
     shadowOffset: {
@@ -192,7 +177,6 @@ export const globalModal = StyleSheet.create({
       height: normalize(12),
     },
     shadowOpacity: 0.58,
-    //shadowRadius: 16.00,
     elevation: 24,
     marginHorizontal: normalize(4),
     marginVertical: normalize(6),
@@ -208,7 +192,7 @@ export const globalModal = StyleSheet.create({
     color: 'white',
     alignSelf: 'center',
     fontFamily: 'Nunito-Regular',
-    fontSize: normalize(16),
+    fontSize: normalize(12),
     justifyContent: 'center',
   },
   HeadingCard: {
@@ -264,7 +248,7 @@ export const globalModal = StyleSheet.create({
     color: 'black',
     alignSelf: 'center',
     fontFamily: 'Nunito-Bold',
-    fontSize: normalize(16),
+    fontSize: normalize(12),
     justifyContent: 'center',
   },
 })

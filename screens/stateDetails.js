@@ -108,7 +108,7 @@ export default function StateDetails({ navigation }) {
                         <Card>
                             <Text style={globalStyles.CardText}>Last Updated</Text>
                             <Text style={{
-                                ...globalStyles.CardText, fontSize: normalize(14),
+                                ...globalStyles.CardText, fontSize: normalize(12),
                                 paddingVertical: normalize(5)
                             }}>{lastupdatedtime}</Text>
                         </Card>
