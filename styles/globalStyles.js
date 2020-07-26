@@ -10,7 +10,7 @@ const {
 const scale = SCREEN_WIDTH / 320;
 
 export function normalize(size) {
-  const newSize = size * scale 
+  const newSize = size * scale
   if (Platform.OS === 'ios') {
     return Math.round(PixelRatio.roundToNearestPixel(newSize))
   } else {
@@ -37,7 +37,7 @@ export const headerStyle = StyleSheet.create({
   headerText: {
     fontFamily: 'Nunito-SemiBold',
     fontWeight: '700',
-    color: 'white',
+    color: 'black',
     fontSize: normalize(26),
     //letterSpacing: 1,
     justifyContent: 'center',
@@ -51,6 +51,8 @@ export const headerStyle = StyleSheet.create({
     width: normalize(42),
     height: normalize(42),
     marginHorizontal: normalize(10),
+    backgroundColor: 'transparent',
+
   },
   headerTitle: {
     flexDirection: 'row'
@@ -134,13 +136,13 @@ export const globalStyles = StyleSheet.create({
     marginHorizontal: normalize(2),
     marginVertical: normalize(2),
     justifyContent: 'space-evenly',
-    alignContent:'center',
+    alignContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
   },
   SubHeadingCardText: {
     padding: normalize(4),
-    color: 'white',
+    color: 'black',
     alignSelf: 'center',
     fontFamily: 'Nunito-Bold',
     fontSize: normalize(16),
@@ -228,7 +230,7 @@ export const globalModal = StyleSheet.create({
     marginVertical: normalize(2),
     alignSelf: 'stretch',
     justifyContent: 'space-evenly',
-    flexDirection:'row',
+    flexDirection: 'row',
   },
   SubHeadingCard: {
     flex: 1,
@@ -252,13 +254,13 @@ export const globalModal = StyleSheet.create({
     marginHorizontal: normalize(2),
     marginVertical: normalize(2),
     justifyContent: 'space-evenly',
-    alignContent:'center',
+    alignContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
   },
   HeadingCardText: {
     padding: 4,
-    color: 'white',
+    color: 'black',
     alignSelf: 'center',
     fontFamily: 'Nunito-Bold',
     fontSize: normalize(16),

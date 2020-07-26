@@ -17,7 +17,7 @@ const StateDataContextProvider = (props) => {
     fetch(STATE_API_EP, { signal: signal, headers: headers })
       .then((response) => response.json())
       .then((json) => setData(json))
-      .catch((error) => setErrorOccurred(true))
+      .catch((error) =>  { console.log(error); return(setErrorOccurred(true))})
       .finally(() => setLoading(false));
   }
   useEffect(() => {
@@ -25,11 +25,15 @@ const StateDataContextProvider = (props) => {
     const signal = abortController.signal
     fetchCumulativeData(signal);
     return function cleanup() {
-      abortController.abort()
+      if (isLoading == false) {
+        abortController.abort()
+      }
     }
   }, [isLoading]);
   return (
-    <StateDataContext.Provider value={{data: data, isLoading:isLoading, errorOccurred:errorOccurred}}>
+    <StateDataContext.Provider value={{data: data, isLoading:isLoading,
+          errorOccurred:errorOccurred, setLoading:setLoading,
+          setErrorOccurred: setErrorOccurred, }}>
       {props.children}
     </StateDataContext.Provider>
   );

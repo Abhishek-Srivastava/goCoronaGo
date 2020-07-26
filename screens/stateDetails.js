@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { Text, View, SafeAreaView, ScrollView, Modal, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { globalStyles, globalStylesScrollers, globalModal, headerStyle, iconColor, normalize } from '../styles/globalStyles';
+import { Text, View, SafeAreaView, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { globalStyles, globalStylesScrollers, globalModal, iconColor, normalize } from '../styles/globalStyles';
 import Card, { ModalSubHeaderCard, ErrorCard } from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
 import { MaterialIcons } from '@expo/vector-icons';
 import DistrictDetails from './districtDetails';
+import { ShowBusy } from './activityIndComponent';
 
 export default function StateDetails({ navigation }) {
     const stateName = navigation.state.routeName
@@ -14,13 +15,9 @@ export default function StateDetails({ navigation }) {
         setLoading(true);
         setErrorOccurred(false)
     }
-
     if (isLoading) {
         return (
-            <View style={globalStyles.screenLoadingContainer}>
-                <ActivityIndicator size="large" color="#00ff00" />
-                <Text style={{ ...headerStyle.headerText, marginTop: normalize(20) }}>Loading district wise stats ...</Text>
-            </View>
+            <ShowBusy message="Loading state covid stats ..." />
         );
     }
 

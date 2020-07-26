@@ -1,18 +1,17 @@
 import React, { useContext } from 'react'
-import { Text, View, SafeAreaView, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { globalStyles, globalStylesScrollers, headerStyle, normalize, globalModal } from '../styles/globalStyles';
-import Card, { ErrorCard, ModalSubHeaderCard, SubHeaderCard } from '../shared/cards';
+import { Text, View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { globalStyles, globalStylesScrollers, normalize } from '../styles/globalStyles';
+import Card, { ErrorCard, SubHeaderCard } from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
+import { ShowBusy } from './activityIndComponent';
 
 
 export default function Home({ navigation }) {
     const { data, isLoading, errorOccurred, setLoading, setErrorOccurred } = useContext(CumulativeDataContext);
+    console.log("Is home loading " + isLoading)
     if (isLoading) {
         return (
-            <View style={globalStyles.screenLoadingContainer}>
-                <ActivityIndicator size="large" color="#00ff00" />
-                <Text style={{ ...headerStyle.headerText, marginTop: normalize(20) }}>Loading cumulative covid stats ...</Text>
-            </View>
+            <ShowBusy message="Loading cumulative covid stats ..." />
         );
     }
 

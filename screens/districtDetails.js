@@ -71,7 +71,7 @@ export default function DistrictDetails({ name }) {
             </View>
             <View style={globalStyles.container}>
                 <ModalCard>
-                    <Text style={globalModal.CardText}>Confirmed</Text>
+                    <Text style={{...globalModal.CardText, fontSize: normalize(15)}}>Confirmed</Text>
                     <Text style={globalModal.CardText}>{confirmed}</Text>
                 </ModalCard>
                 <ModalCard>
