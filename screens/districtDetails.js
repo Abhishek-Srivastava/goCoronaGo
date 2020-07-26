@@ -1,10 +1,26 @@
-import React, { useContext, } from 'react'
-import { View, Text, SafeAreaView, FlatList, } from 'react-native';
+import React, { useContext, useState, } from 'react'
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, } from 'react-native';
 import { globalStyles, globalStylesScrollers, globalModal, normalize, iconColor } from '../styles/globalStyles';
 import { StateDataContext } from '../shared/apiDistrictwise';
 import { ModalCard, HeadingModalCard, ModalSubHeaderCard } from '../shared/cards';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
+const MyDelta = ({ delta, name, dName, display }) => {
+    if (display) {
+        return <View />
+    }
+    return (
+        <HeadingModalCard>
+            <Text style={globalModal.HeadingCardText} >Today's Updates: </Text>
+            <Text key={name + dName + "confirmed"} style={globalModal.HeadingCardText}>{delta.confirmed}</Text>
+            <MaterialCommunityIcons name="emoticon-sad-outline" size={normalize(24)} color="yellow" />
+            <Text key={name + dName + "recovered"} style={globalModal.HeadingCardText}>{delta.recovered}</Text>
+            <MaterialCommunityIcons name="emoticon-happy-outline" size={normalize(24)} color="blue" />
+            <Text key={name + dName + "deceased"} style={globalModal.HeadingCardText}>{delta.deceased}</Text>
+            <MaterialCommunityIcons name="emoticon-dead-outline" size={normalize(24)} color="#e4286b" />
+        </HeadingModalCard>
+    );
+}
 export default function DistrictDetails({ name }) {
     const { data, isLoading, errorOccurred } = useContext(StateDataContext);
 
@@ -31,6 +47,7 @@ export default function DistrictDetails({ name }) {
 
     let myComp = [];
 
+
     let allDistrictData = currentState.districtData
     Object.keys(allDistrictData).forEach((dName, index) => {
         allDistrictData[dName]["key"] = dName
@@ -50,45 +67,45 @@ export default function DistrictDetails({ name }) {
     }
     myComp.sort(compare);
 
-    const Item = ({ dName, active, confirmed, deceased, recovered, delta }) => (
-        <View key={dName}>
-            <View style={globalStyles.container}>
 
-                <HeadingModalCard>
-                    <Text key={name + dName} style={globalModal.HeadingCardText}>{dName}</Text>
-                </HeadingModalCard>
+    const Item = ({ dName, active, confirmed, deceased, recovered, delta }) => {
+        const [display, setDisplay] = useState(true)
+        console.log('display inside func it ' + display)
+        return (
+            <View key={dName}>
+                <TouchableOpacity onPress={() => setDisplay(!display)}>
+                    <ModalSubHeaderCard>
+                        <MaterialIcons name='details' size={normalize(16)}
+                            style={{ backgroundColor: iconColor }}
+                            onPress={() => setModalOpen(true)}
+                        />
+                        <Text key={name + dName} style={globalModal.HeadingCardText}>{dName}</Text>
+                    </ModalSubHeaderCard>
+                </TouchableOpacity>
+                <View style={globalStyles.container}>
+                    <MyDelta delta={delta} name={name} dName={dName} display={display} />
+                </View>
+                <View style={globalStyles.container}>
+                    <ModalCard>
+                        <Text style={{ ...globalModal.CardText, fontSize: normalize(15) }}>Confirmed</Text>
+                        <Text style={globalModal.CardText}>{confirmed}</Text>
+                    </ModalCard>
+                    <ModalCard>
+                        <Text style={globalModal.CardText}>Active</Text>
+                        <Text style={globalModal.CardText}>{active}</Text>
+                    </ModalCard>
+                    <ModalCard>
+                        <Text style={{ ...globalModal.CardText, fontSize: normalize(15) }}>Recovered</Text>
+                        <Text style={globalModal.CardText}>{recovered}</Text>
+                    </ModalCard>
+                    <ModalCard>
+                        <Text style={globalModal.CardText}>Deceased</Text>
+                        <Text style={globalModal.CardText}>{deceased}</Text>
+                    </ModalCard>
+                </View>
             </View>
-            <View style={globalStyles.container}>
-                <HeadingModalCard>
-                    <Text style={globalModal.HeadingCardText} >Today's Updates: </Text>
-                    <Text key={name + dName + "confirmed"} style={globalModal.HeadingCardText}>{delta.confirmed}</Text>
-                    <MaterialCommunityIcons name="emoticon-sad-outline" size={normalize(24)} color="yellow" />
-                    <Text key={name + dName + "recovered"} style={globalModal.HeadingCardText}>{delta.recovered}</Text>
-                    <MaterialCommunityIcons name="emoticon-happy-outline" size={normalize(24)} color="blue" />
-                    <Text key={name + dName + "deceased"} style={globalModal.HeadingCardText}>{delta.deceased}</Text>
-                    <MaterialCommunityIcons name="emoticon-dead-outline" size={normalize(24)} color="#e4286b" />
-                </HeadingModalCard>
-            </View>
-            <View style={globalStyles.container}>
-                <ModalCard>
-                    <Text style={{...globalModal.CardText, fontSize: normalize(15)}}>Confirmed</Text>
-                    <Text style={globalModal.CardText}>{confirmed}</Text>
-                </ModalCard>
-                <ModalCard>
-                    <Text style={globalModal.CardText}>Active</Text>
-                    <Text style={globalModal.CardText}>{active}</Text>
-                </ModalCard>
-                <ModalCard>
-                    <Text style={{...globalModal.CardText, fontSize: normalize(15)}}>Recovered</Text>
-                    <Text style={globalModal.CardText}>{recovered}</Text>
-                </ModalCard>
-                <ModalCard>
-                    <Text style={globalModal.CardText}>Deceased</Text>
-                    <Text style={globalModal.CardText}>{deceased}</Text>
-                </ModalCard>
-            </View>
-        </View>
-    );
+        )
+    };
 
     const renderItem = ({ item }) => {
         return (

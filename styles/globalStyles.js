@@ -45,16 +45,17 @@ export const headerStyle = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    left: normalize(16),
+    left: normalize(10),
   },
   headerImage: {
     width: normalize(42),
     height: normalize(42),
-    marginHorizontal: normalize(10),
+    //marginLeft: normalize(10),
     backgroundColor: 'transparent',
 
   },
   headerTitle: {
+    alignItems: 'stretch',
     flexDirection: 'row'
   },
 })
@@ -212,7 +213,7 @@ export const globalModal = StyleSheet.create({
   },
   HeadingCard: {
     flex: 1,
-    //borderRadius: 6,
+    borderRadius: 6,
     backgroundColor: cardHeadingColor,
     shadowColor: '#333',
     shadowOffset: {
@@ -220,7 +221,7 @@ export const globalModal = StyleSheet.create({
       height: normalize(12),
     },
     shadowOpacity: 0.58,
-    //shadowRadius: 16.00,
+    shadowRadius: 16.00,
     elevation: 24,
     marginHorizontal: normalize(4),
     marginVertical: normalize(6),

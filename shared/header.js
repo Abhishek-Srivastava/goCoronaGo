@@ -7,7 +7,6 @@ import { CumulativeDataContext } from '../shared/apiClient';
 import { StateDataContext } from './apiDistrictwise';
 
 export default function Header(props) {
-    console.log("props are: " + JSON.stringify(props))
     const { navigation, title } = props
     const cumContext = useContext(CumulativeDataContext);
     const stateContext = useContext(StateDataContext);
@@ -16,7 +15,6 @@ export default function Header(props) {
         cumContext.setLoading(true);
         cumContext.setErrorOccurred(false);
         if (routeName != "Home") {
-            console.log("Refreshing the home page")
             stateContext.setLoading(true);
             stateContext.setErrorOccurred(false);
         }

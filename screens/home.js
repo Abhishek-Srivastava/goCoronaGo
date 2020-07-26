@@ -8,7 +8,6 @@ import { ShowBusy } from './activityIndComponent';
 
 export default function Home({ navigation }) {
     const { data, isLoading, errorOccurred, setLoading, setErrorOccurred } = useContext(CumulativeDataContext);
-    console.log("Is home loading " + isLoading)
     if (isLoading) {
         return (
             <ShowBusy message="Loading cumulative covid stats ..." />
@@ -42,7 +41,7 @@ export default function Home({ navigation }) {
                 <ScrollView style={globalStylesScrollers.scrollView}>
 
                     <SubHeaderCard>
-                        <Text style={{...globalStyles.SubHeadingCardText, fontSize: normalize(20)}}>India Covid Stats</Text>
+                        <Text style={{ ...globalStyles.SubHeadingCardText, fontSize: normalize(20) }}>India Covid Stats</Text>
                         <Text style={globalStyles.SubHeadingCardText}>{date}</Text>
                     </SubHeaderCard>
                     <View style={globalStyles.container}>

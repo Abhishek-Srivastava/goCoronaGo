@@ -1,5 +1,7 @@
 import React, { useEffect, useState, createContext } from 'react'
-import { CUMULATIVE_API_EP } from '../shared/appConstants';
+import { CUMULATIVE_API_EP, TIMEOUT } from '../shared/appConstants';
+import customFetch from './cutomFetch'
+
 export const CumulativeDataContext = createContext();
 
 const CumulativeDataContextProvider = (props) => {
@@ -11,11 +13,12 @@ const CumulativeDataContextProvider = (props) => {
     'Accept-Encoding': 'gzip, deflate',
     'Content-Type': 'application/json',
   });
+
   const fetchCumulativeData = async (signal) => {
-    fetch(CUMULATIVE_API_EP, { signal: signal, headers: headers })
+    customFetch(CUMULATIVE_API_EP, { signal: signal, headers: headers }, TIMEOUT)
       .then((response) => response.json())
       .then((json) => setData(json))
-      .catch((error) => { console.log(error); return(setErrorOccurred(true))})
+      .catch((error) => { console.log(error); return (setErrorOccurred(true)) })
       .finally(() => setLoading(false));
   }
   useEffect(() => {
@@ -29,9 +32,11 @@ const CumulativeDataContextProvider = (props) => {
     }
   }, [isLoading]);
   return (
-    <CumulativeDataContext.Provider value={{data: data, 
-    isLoading:isLoading, errorOccurred:errorOccurred, setLoading:setLoading,
-    setErrorOccurred: setErrorOccurred}}>
+    <CumulativeDataContext.Provider value={{
+      data: data,
+      isLoading: isLoading, errorOccurred: errorOccurred, setLoading: setLoading,
+      setErrorOccurred: setErrorOccurred
+    }}>
       {props.children}
     </CumulativeDataContext.Provider>
   );

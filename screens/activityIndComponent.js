@@ -3,7 +3,7 @@ import { View, ActivityIndicator, Text } from 'react-native';
 import { globalStyles, headerStyle, normalize } from '../styles/globalStyles';
 
 
-export const ShowBusy = ({message}) => {
+export const ShowBusy = ({ message }) => {
     return (
         <View style={globalStyles.screenLoadingContainer}>
             <ActivityIndicator size="large" color="#00ff00" />
