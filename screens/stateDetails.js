@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Text, View, SafeAreaView, ScrollView, Modal, TouchableOpacity } from 'react-native';
-import { globalStyles, globalStylesScrollers, globalModal, iconColor, normalize } from '../styles/globalStyles';
+import { globalStyles, globalStylesScrollers, globalModal, iconColor, } from '../styles/globalStyles';
+import { moderateScale } from '../styles/scale_utils';
 import Card, { ModalSubHeaderCard, ErrorCard } from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -15,6 +16,9 @@ export default function StateDetails({ navigation }) {
         setLoading(true);
         setErrorOccurred(false)
     }
+    const { statewise } = data;
+    const [modalOpen, setModalOpen] = useState('false')
+
     if (isLoading) {
         return (
             <ShowBusy message="Loading state covid stats ..." />
@@ -33,8 +37,6 @@ export default function StateDetails({ navigation }) {
         )
     }
 
-    const { statewise } = data;
-    const [modalOpen, setModalOpen] = useState('false')
 
     if (statewise) {
         stateToBeRendered = statewise.filter((state) => state.state == stateName)
@@ -45,7 +47,7 @@ export default function StateDetails({ navigation }) {
                 <ScrollView style={globalStylesScrollers.scrollView}>
                     <TouchableOpacity onPress={() => setModalOpen(true)}>
                         <ModalSubHeaderCard>
-                            <MaterialIcons name='details' size={normalize(16)}
+                            <MaterialIcons name='details' size={moderateScale(16)}
                                 style={{ backgroundColor: iconColor }}
                                 onPress={() => setModalOpen(true)}
                             />
@@ -67,6 +69,14 @@ export default function StateDetails({ navigation }) {
                             </View>
                         </Modal>
 
+                    </View>
+                    <View style={globalStyles.container}>
+                        <Card>
+                            <Text style={globalStyles.CardText}>Last Updated</Text>
+                            <Text style={{
+                                ...globalStyles.CardText,
+                            }}>{lastupdatedtime}</Text>
+                        </Card>
                     </View>
                     <View style={globalStyles.container}>
                         <Card>
@@ -104,13 +114,6 @@ export default function StateDetails({ navigation }) {
                         <Card>
                             <Text style={globalStyles.CardText}>Total Deaths</Text>
                             <Text style={globalStyles.CardText}>{deaths}</Text>
-                        </Card>
-                        <Card>
-                            <Text style={globalStyles.CardText}>Last Updated</Text>
-                            <Text style={{
-                                ...globalStyles.CardText, fontSize: normalize(12),
-                                paddingVertical: normalize(5)
-                            }}>{lastupdatedtime}</Text>
                         </Card>
                     </View>
                     <View style={globalStyles.container}>

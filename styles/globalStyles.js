@@ -1,20 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Dimensions, Platform, PixelRatio } from 'react-native';
-
-const {
-  width: SCREEN_WIDTH,
-  height: SCREEN_HEIGHT,
-} = Dimensions.get('window');
-
-const scale = SCREEN_WIDTH / 320;
-export function normalize(size) {
-  const newSize = size * scale
-  if (Platform.OS === 'ios') {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize))
-  } else {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2
-  }
-}
+import { moderateScale, scale, verticalScale } from './scale_utils';
 
 export const containerBgColor = '#0a0d47'
 export const cardBgColor = '#383ebd'
@@ -28,27 +13,29 @@ export const headerStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginHorizontal: normalize(10),
-    marginVertical: normalize(10),
+    marginHorizontal: scale(20),
+    marginVertical: scale(10),
   },
   headerText: {
     fontFamily: 'Nunito-SemiBold',
     fontWeight: '700',
     color: 'black',
-    fontSize: normalize(16),
+
+    fontSize: moderateScale(20),
     letterSpacing: 1,
   },
   icon: {
     //position: 'absolute',
-    //left: normalize(10),
+    //left: moderateScale(10),
   },
   headerImage: {
-    width: normalize(22),
-    height: normalize(22),
+    width: moderateScale(30),
+    height: verticalScale(30),
     backgroundColor: 'transparent',
-
   },
   headerTitle: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
 })
@@ -77,19 +64,19 @@ export const globalStyles = StyleSheet.create({
     },
     shadowOpacity: 0.58,
     elevation: 24,
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(6),
+    marginHorizontal: moderateScale(4),
+    marginVertical: moderateScale(6),
   },
   CardContent: {
-    marginHorizontal: normalize(5),
-    marginVertical: normalize(15),
+    marginHorizontal: moderateScale(5),
+    marginVertical: moderateScale(15),
   },
   CardText: {
-    padding: normalize(4),
+    padding: moderateScale(4),
     color: 'white',
     alignSelf: 'center',
     fontFamily: 'Nunito-SemiBold',
-    fontSize: normalize(12),
+    fontSize: moderateScale(12),
     justifyContent: 'center',
   },
   ErrorCard: {
@@ -98,13 +85,13 @@ export const globalStyles = StyleSheet.create({
     shadowColor: '#333',
     shadowOffset: {
       width: 0,
-      height: normalize(8),
+      height: verticalScale(8),
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.00,
     elevation: 24,
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(6),
+    marginHorizontal: moderateScale(4),
+    marginVertical: moderateScale(6),
   },
   SubHeadingCard: {
     flex: 1,
@@ -112,30 +99,30 @@ export const globalStyles = StyleSheet.create({
     shadowColor: '#333',
     shadowOffset: {
       width: 0,
-      height: normalize(12),
+      height: verticalScale(12),
     },
     shadowOpacity: 0.58,
     elevation: 24,
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(6),
+    marginHorizontal: moderateScale(4),
+    marginVertical: moderateScale(6),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   SubHeadingCardContent: {
-    marginHorizontal: normalize(2),
-    marginVertical: normalize(2),
+    marginHorizontal: moderateScale(2),
+    marginVertical: moderateScale(2),
     justifyContent: 'space-evenly',
     alignContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
   },
   SubHeadingCardText: {
-    padding: normalize(4),
+    padding: moderateScale(4),
     color: 'black',
     alignSelf: 'center',
     fontFamily: 'Nunito-Bold',
-    fontSize: normalize(12),
+    fontSize: moderateScale(12),
     justifyContent: 'center',
   },
 });
@@ -146,25 +133,25 @@ export const globalStylesScrollers = StyleSheet.create({
     backgroundColor: globalStyles.container.backgroundColor,
   },
   scrollView: {
-    padding: normalize(10),
-    marginBottom: normalize(10),
+    padding: moderateScale(10),
+    marginBottom: moderateScale(10),
     backgroundColor: globalStyles.container.backgroundColor,
   }
 })
 
 export const globalModal = StyleSheet.create({
   modalToggle: {
-    marginBottom: normalize(10),
+    marginBottom: moderateScale(10),
     borderWidth: 1,
     borderColor: '#f2f2f2',
-    padding: normalize(10),
-    borderRadius: normalize(10),
+    padding: moderateScale(10),
+    borderRadius: moderateScale(10),
     alignSelf: 'center',
     backgroundColor: iconColor,
   },
   modalClose: {
-    marginBottom: normalize(10),
-    marginTop: normalize(20),
+    marginBottom: moderateScale(10),
+    marginTop: moderateScale(20),
   },
   modalContent: {
     flex: 1,
@@ -176,25 +163,25 @@ export const globalModal = StyleSheet.create({
     shadowColor: '#333',
     shadowOffset: {
       width: 0,
-      height: normalize(12),
+      height: moderateScale(12),
     },
     shadowOpacity: 0.58,
     elevation: 24,
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(6),
+    marginHorizontal: moderateScale(4),
+    marginVertical: moderateScale(6),
   },
   CardContent: {
-    marginHorizontal: normalize(2),
-    marginVertical: normalize(2),
+    marginHorizontal: moderateScale(2),
+    marginVertical: moderateScale(2),
     alignSelf: 'stretch',
     justifyContent: 'space-evenly'
   },
   CardText: {
-    padding: normalize(4),
+    padding: moderateScale(2),
     color: 'white',
     alignSelf: 'center',
     fontFamily: 'Nunito-Regular',
-    fontSize: normalize(12),
+    fontSize: moderateScale(12, 0.25),
     justifyContent: 'center',
   },
   HeadingCard: {
@@ -204,19 +191,19 @@ export const globalModal = StyleSheet.create({
     shadowColor: '#333',
     shadowOffset: {
       width: 0,
-      height: normalize(12),
+      height: moderateScale(12),
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.00,
     elevation: 24,
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(6),
+    marginHorizontal: moderateScale(4),
+    marginVertical: moderateScale(6),
   },
   HeadingCardContent: {
-    marginHorizontal: normalize(2),
-    marginVertical: normalize(2),
-    alignSelf: 'stretch',
-    justifyContent: 'space-evenly',
+    marginHorizontal: moderateScale(2),
+    marginVertical: moderateScale(2),
+    alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
   SubHeadingCard: {
@@ -226,20 +213,20 @@ export const globalModal = StyleSheet.create({
     shadowColor: '#333',
     shadowOffset: {
       width: 0,
-      height: normalize(12),
+      height: moderateScale(12),
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.00,
     elevation: 24,
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(6),
+    marginHorizontal: moderateScale(4),
+    marginVertical: moderateScale(6),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   SubHeadingCardContent: {
-    marginHorizontal: normalize(2),
-    marginVertical: normalize(2),
+    marginHorizontal: moderateScale(2),
+    marginVertical: moderateScale(2),
     justifyContent: 'space-evenly',
     alignContent: 'center',
     flexDirection: 'row',
@@ -250,7 +237,7 @@ export const globalModal = StyleSheet.create({
     color: 'black',
     alignSelf: 'center',
     fontFamily: 'Nunito-Bold',
-    fontSize: normalize(12),
+    fontSize: moderateScale(12),
     justifyContent: 'center',
   },
 })

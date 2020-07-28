@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, ActivityIndicator, Text } from 'react-native';
-import { globalStyles, headerStyle, normalize } from '../styles/globalStyles';
-
+import { globalStyles, headerStyle, } from '../styles/globalStyles';
+import { moderateScale } from '../styles/scale_utils';
 
 export const ShowBusy = ({ message }) => {
     return (
         <View style={globalStyles.screenLoadingContainer}>
             <ActivityIndicator size="large" color="#00ff00" />
-            <Text style={{ ...headerStyle.headerText, marginTop: normalize(20), color: 'white' }}>{message}</Text>
+            <Text style={{ ...headerStyle.headerText, marginTop: moderateScale(20), color: 'white' }}>{message}</Text>
         </View>
     )
 };

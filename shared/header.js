@@ -2,7 +2,8 @@ import React, { useContext, } from 'react'
 import { Text, View, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { headerStyle, normalize, globalStyles } from '../styles/globalStyles';
+import { headerStyle, globalStyles } from '../styles/globalStyles';
+import { moderateScale } from '../styles/scale_utils';
 import { CumulativeDataContext } from '../shared/apiClient';
 import { StateDataContext } from './apiDistrictwise';
 
@@ -26,7 +27,7 @@ export default function Header(props) {
 
     const HeaderComp = () => (
         <View style={headerStyle.header}>
-            <MaterialIcons name='menu' size={normalize(18)}
+            <MaterialIcons name='menu' size={moderateScale(18)}
                 onPress={openMenu} style={headerStyle.icon}
             />
             <View style={headerStyle.headerTitle}>
@@ -36,7 +37,7 @@ export default function Header(props) {
                 <TouchableOpacity onPress={refresh}>
                     <FontAwesome
                         name="refresh"
-                        size={normalize(16)}
+                        size={moderateScale(20)}
                         color="black"
                     />
                 </TouchableOpacity>
@@ -45,7 +46,7 @@ export default function Header(props) {
     const ActivityComponent = () => (
         <View style={globalStyles.screenLoadingContainer}>
             <ActivityIndicator size="large" color="#00ff00" />
-            <Text style={{ ...headerStyle.headerText, marginTop: normalize(14) }}>Loading district wise stats ...</Text>
+            <Text style={{ ...headerStyle.headerText, marginTop: moderateScale(14) }}>Loading district wise stats ...</Text>
         </View>
     )
     return (

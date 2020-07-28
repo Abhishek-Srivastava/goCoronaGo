@@ -4,14 +4,14 @@
   "expo": {
     "name": "goCoronaGo",
     "slug": "goCoronaGo",
-    "version": "1.0.0",
+    "version": "5.0.0",
     "icon": "./assets/images/cornonavirus.png",
     "assetBundlePatterns": [
       "**/*"
     ],
     "android": {
       "package": "com.abhishek_srivastava.goCoronaGo",
-      "versionCode": 4
+      "versionCode": 5
     }
   }
 }

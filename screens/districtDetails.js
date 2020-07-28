@@ -1,6 +1,7 @@
 import React, { useContext, useState, } from 'react'
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity, } from 'react-native';
-import { globalStyles, globalStylesScrollers, globalModal, normalize, iconColor } from '../styles/globalStyles';
+import { globalStyles, globalStylesScrollers, globalModal, iconColor } from '../styles/globalStyles';
+import { moderateScale } from '../styles/scale_utils';
 import { StateDataContext } from '../shared/apiDistrictwise';
 import { ModalCard, HeadingModalCard, ModalSubHeaderCard } from '../shared/cards';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -13,11 +14,11 @@ const MyDelta = ({ delta, name, dName, display }) => {
         <HeadingModalCard>
             <Text style={globalModal.HeadingCardText} >Today's Updates: </Text>
             <Text key={name + dName + "confirmed"} style={globalModal.HeadingCardText}>{delta.confirmed}</Text>
-            <MaterialCommunityIcons name="emoticon-sad-outline" size={normalize(22)} color="yellow" />
+            <MaterialCommunityIcons name="emoticon-sad-outline" size={moderateScale(22)} color="yellow" />
             <Text key={name + dName + "recovered"} style={globalModal.HeadingCardText}>{delta.recovered}</Text>
-            <MaterialCommunityIcons name="emoticon-happy-outline" size={normalize(22)} color="blue" />
+            <MaterialCommunityIcons name="emoticon-happy-outline" size={moderateScale(22)} color="blue" />
             <Text key={name + dName + "deceased"} style={globalModal.HeadingCardText}>{delta.deceased}</Text>
-            <MaterialCommunityIcons name="emoticon-dead-outline" size={normalize(22)} color="#e4286b" />
+            <MaterialCommunityIcons name="emoticon-dead-outline" size={moderateScale(22)} color="#e4286b" />
         </HeadingModalCard>
     );
 }
@@ -28,7 +29,7 @@ export default function DistrictDetails({ name }) {
         return (
             <View style={globalStyles.screenLoadingContainer}>
                 <ActivityIndicator size="large" color="#00ff00" />
-                <Text style={{ ...headerStyle.headerText, marginTop: normalize(16) }}>Loading district wise stats...</Text>
+                <Text style={{ ...headerStyle.headerText, marginTop: moderateScale(16) }}>Loading district wise stats...</Text>
             </View>
         );
     }
@@ -46,7 +47,6 @@ export default function DistrictDetails({ name }) {
     const currentState = data[name]
 
     let myComp = [];
-
 
     let allDistrictData = currentState.districtData
     Object.keys(allDistrictData).forEach((dName, index) => {
@@ -74,7 +74,7 @@ export default function DistrictDetails({ name }) {
             <View key={dName}>
                 <TouchableOpacity onPress={() => setDisplay(!display)}>
                     <ModalSubHeaderCard>
-                        <MaterialIcons name='details' size={normalize(14)}
+                        <MaterialIcons name='details' size={moderateScale(14)}
                             style={{ backgroundColor: iconColor }}
                             onPress={() => setModalOpen(true)}
                         />
@@ -86,7 +86,7 @@ export default function DistrictDetails({ name }) {
                 </View>
                 <View style={globalStyles.container}>
                     <ModalCard>
-                        <Text style={{ ...globalModal.CardText, fontSize: normalize(12) }}>Confirmed</Text>
+                        <Text style={{ ...globalModal.CardText, }}>Confirmed</Text>
                         <Text style={globalModal.CardText}>{confirmed}</Text>
                     </ModalCard>
                     <ModalCard>
@@ -94,7 +94,7 @@ export default function DistrictDetails({ name }) {
                         <Text style={globalModal.CardText}>{active}</Text>
                     </ModalCard>
                     <ModalCard>
-                        <Text style={{ ...globalModal.CardText, fontSize: normalize(12) }}>Recovered</Text>
+                        <Text style={{ ...globalModal.CardText, }}>Recovered</Text>
                         <Text style={globalModal.CardText}>{recovered}</Text>
                     </ModalCard>
                     <ModalCard>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Text, View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
-import { globalStyles, globalStylesScrollers, normalize } from '../styles/globalStyles';
+import { globalStyles, globalStylesScrollers, } from '../styles/globalStyles';
+import { moderateScale } from '../styles/scale_utils';
 import Card, { ErrorCard, SubHeaderCard } from '../shared/cards';
 import { CumulativeDataContext } from '../shared/apiClient';
 import { ShowBusy } from './activityIndComponent';
@@ -43,7 +44,7 @@ export default function Home({ navigation }) {
                 <ScrollView style={globalStylesScrollers.scrollView}>
 
                     <SubHeaderCard>
-                        <Text style={{ ...globalStyles.SubHeadingCardText, fontSize: normalize(20) }}>India Covid Stats</Text>
+                        <Text style={{ ...globalStyles.SubHeadingCardText, fontSize: moderateScale(20) }}>India Covid Stats</Text>
                         <Text style={globalStyles.SubHeadingCardText}>{lastupdatedtime}</Text>
                     </SubHeaderCard>
                     <View style={globalStyles.container}>
