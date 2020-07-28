@@ -28,6 +28,8 @@ export const headerStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    marginHorizontal: normalize(10),
+    marginVertical: normalize(10),
   },
   headerText: {
     fontFamily: 'Nunito-SemiBold',

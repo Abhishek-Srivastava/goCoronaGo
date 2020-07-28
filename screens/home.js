@@ -31,27 +31,29 @@ export default function Home({ navigation }) {
         )
     }
 
-    const { cases_time_series, tested } = data
-
-    if (cases_time_series) {
-        const { totalconfirmed, totalrecovered, totaldeceased, dailyconfirmed, dailydeceased, dailyrecovered, date } = cases_time_series[cases_time_series.length - 1]
-        let active = totalconfirmed - totalrecovered - totaldeceased
+    const { statewise, tested } = data
+    const india = statewise.filter((state) => state.state === "Total")
+    if (india) {
+        const { confirmed, recovered, deaths,
+            deltaconfirmed, deltadeaths, deltarecovered,
+            lastupdatedtime, migratedother } = india[0]
+        let active = confirmed - recovered - deaths
         return (
             <SafeAreaView style={globalStylesScrollers.safeArea}>
                 <ScrollView style={globalStylesScrollers.scrollView}>
 
                     <SubHeaderCard>
                         <Text style={{ ...globalStyles.SubHeadingCardText, fontSize: normalize(20) }}>India Covid Stats</Text>
-                        <Text style={globalStyles.SubHeadingCardText}>{date}</Text>
+                        <Text style={globalStyles.SubHeadingCardText}>{lastupdatedtime}</Text>
                     </SubHeaderCard>
                     <View style={globalStyles.container}>
                         <Card>
                             <Text style={globalStyles.CardText}>Total Confirmed:</Text>
-                            <Text style={globalStyles.CardText}>{totalconfirmed}</Text>
+                            <Text style={globalStyles.CardText}>{confirmed}</Text>
                         </Card>
                         <Card>
                             <Text style={globalStyles.CardText}>Confirmed today:</Text>
-                            <Text style={globalStyles.CardText}>{dailyconfirmed}</Text>
+                            <Text style={globalStyles.CardText}>{deltaconfirmed}</Text>
                         </Card>
                     </View>
                     <View style={globalStyles.container}>
@@ -60,28 +62,35 @@ export default function Home({ navigation }) {
                             <Text style={globalStyles.CardText}>{active}</Text>
                         </Card>
                         <Card>
-                            <Text style={globalStyles.CardText}>Deaths Today:</Text>
-                            <Text style={globalStyles.CardText}>{dailydeceased}</Text>
+                            <Text style={globalStyles.CardText}>Migrated/Others</Text>
+                            <Text style={globalStyles.CardText}>{migratedother}</Text>
                         </Card>
                     </View>
                     <View style={globalStyles.container}>
                         <Card >
                             <Text style={globalStyles.CardText}>Total Recovered:</Text>
-                            <Text style={globalStyles.CardText}>{totalrecovered}</Text>
+                            <Text style={globalStyles.CardText}>{recovered}</Text>
                         </Card>
 
                         <Card >
                             <Text style={globalStyles.CardText}>Recovered Today:</Text>
-                            <Text style={globalStyles.CardText}>{dailyrecovered}</Text>
+                            <Text style={globalStyles.CardText}>{deltarecovered}</Text>
+                        </Card>
+                    </View>
+                    <View style={globalStyles.container}>
+                        <Card>
+                            <Text style={globalStyles.CardText}>Total Deaths</Text>
+                            <Text style={globalStyles.CardText}>{deaths}</Text>
+                        </Card>
+                        <Card>
+                            <Text style={globalStyles.CardText}>Deaths Today:</Text>
+                            <Text style={globalStyles.CardText}>{deltadeaths}</Text>
                         </Card>
                     </View>
                     <View style={globalStyles.container}>
                         <Card>
                             <Text style={globalStyles.CardText}>Total Tested</Text>
                             <Text style={globalStyles.CardText}>{tested[tested.length - 1].totalsamplestested}</Text>
-                        </Card>
-                        <Card>
-                            <Text style={globalStyles.CardText}>Test Data as of</Text>
                             <Text style={globalStyles.CardText}>{tested[tested.length - 1].testedasof}</Text>
                         </Card>
                     </View>
